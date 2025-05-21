@@ -36,7 +36,7 @@ return [
     'switch_tenant_tasks' => [
         \Spatie\Multitenancy\Tasks\PrefixCacheTask::class,
         \Spatie\Multitenancy\Tasks\SwitchTenantDatabaseTask::class,
-        \Spatie\Multitenancy\Tasks\SwitchTenantFilesystemTask::class,
+        \App\Multitenancy\Tasks\SwitchTenantFilesystemTask::class,
         // \Spatie\Multitenancy\Tasks\SwitchRouteCacheTask::class,
     ],
 
