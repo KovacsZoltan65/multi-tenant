@@ -70,3 +70,9 @@ php artisan tenants:artisan "migrate:fresh --path=database/migrations/tenant --d
     Storage::put("uploads/{$subdomain}/filename.txt", $content);
     Storage::put("bills/{$subdomain}/invoice.pdf", $pdfContent);
 
+// ============================================
+// JOGOSULTSÁGKEZELÉS
+// ============================================
+composer require spatie/laravel-permission
+php artisan vendor:publish --provider="Spatie\Permission\PermissionServiceProvider"
+php artisan tenants:artisan "migrate --path=database/migrations/tenant --database=tenant"
