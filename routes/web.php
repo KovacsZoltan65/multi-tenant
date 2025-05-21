@@ -24,4 +24,13 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
+/*
+ * =======================================================
+ * http://company_01.localhost:8000/employees
+ * http://company_02.localhost:8000/employees
+ * =======================================================
+ */
+
+Route::get('/employees', [App\Http\Controllers\EmployeeController::class, 'index'])->name('employees.index');
+
 require __DIR__.'/auth.php';
