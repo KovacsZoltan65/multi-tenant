@@ -45,3 +45,24 @@ php artisan migrate:fresh --path=database/migrations/landlord --database=landlor
 php artisan tenants:artisan "migrate --path=database/migrations/tenant --database=tenant --seed"
 
 php artisan tenants:artisan "migrate:fresh --path=database/migrations/tenant --database=tenant --seed"
+
+// ============================================
+// CACHE ELKÜLÖNÍTÉS
+// ============================================
+1. Konfiguráció frissítése:
+    config/multitenancy.php:
+        'switch_tenant_tasks' => [
+            Spatie\Multitenancy\Tasks\PrefixCacheTask::class,
+            // egyéb feladatok...
+        ],
+    
+2. Cache használata:
+    A beállítás után a cache használata automatikusan bérlőspecifikus lesz. Például:
+        cache()->put('kulcs', 'érték');
+        $érték = cache()->get('kulcs');
+    A fenti példában a 'kulcs' csak az aktuális bérlő cache-ében lesz elérhető.
+    Megjegyzés: A PrefixCacheTask csak memóriaalapú cache tárolók esetén működik, mint például APC vagy Redis. 
+
+// ============================================
+// FÁJLRENDSZER ELKÜLÖNÍTÉS
+// ============================================
