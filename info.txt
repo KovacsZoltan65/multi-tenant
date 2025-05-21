@@ -1,0 +1,47 @@
+https://spatie.be/docs/laravel-multitenancy/v4/introduction
+
+
+composer create-project laravel/laravel multi-tenant
+composer require laravel/breeze --dev
+composer require "spatie/laravel-multitenancy"
+php artisan breeze:install vue
+npm install
+npm install vue@3 @inertiajs/vue3
+
+
+
+php artisan vendor:publish --provider="Spatie\Multitenancy\MultitenancyServiceProvider" --tag="multitenancy-config"
+php artisan vendor:publish --provider="Spatie\Multitenancy\MultitenancyServiceProvider" --tag="multitenancy-migrations"
+
+    // in `bootstrap/app.php`
+
+    return Application::configure(basePath: dirname(__DIR__))
+        // ...
+        ->withMiddleware(function (Middleware $middleware) {
+            $middleware
+                ->web(append: [
+                    \Spatie\Multitenancy\Http\Middleware\NeedsTenant::class,
+                    \Spatie\Multitenancy\Http\Middleware\EnsureValidTenantSession::class,
+                ]);
+        });
+
+
+MUGRÁCIÓ
+A TENANT SPECIFIKUS ADATBÁZISOKAT LÉTRE KELL HOZNI!!!!!
+CREATE DATABASE company_01
+	CHARACTER SET utf8mb3
+	COLLATE utf8mb3_unicode_ci;
+
+CREATE DATABASE company_02
+	CHARACTER SET utf8mb3
+	COLLATE utf8mb3_unicode_ci;
+
+
+php artisan vendor:publish --provider="Spatie\Multitenancy\MultitenancyServiceProvider" --tag="multitenancy-migrations"
+
+php artisan migrate --path=database/migrations/landlord --database=landlord --seed
+php artisan migrate:fresh --path=database/migrations/landlord --database=landlord --seed
+
+php artisan tenants:artisan "migrate --path=database/migrations/tenant --database=tenant --seed"
+
+php artisan tenants:artisan "migrate --path=database/migrations/tenant --database=tenant --seed"

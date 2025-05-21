@@ -1,0 +1,23 @@
+<?php
+
+namespace Database\Seeders;
+
+use App\Models\Tenant;
+use Carbon\Carbon;
+use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use Illuminate\Database\Seeder;
+
+class TenantSeeder extends Seeder
+{
+    /**
+     * Run the database seeds.
+     */
+    public function run(): void
+    {
+        $now = Carbon::now();
+        Tenant::insert([
+            ['name' => 'Company 01', 'domain' => 'company_01.localhost', 'database' => 'company_01','created_at' => $now,    'updated_at' => $now,],
+            ['name' => 'Company 02', 'domain' => 'company_02.localhost', 'database' => 'company_02','created_at' => $now,    'updated_at' => $now,],
+        ]);
+    }
+}
