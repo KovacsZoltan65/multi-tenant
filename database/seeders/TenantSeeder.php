@@ -16,8 +16,12 @@ class TenantSeeder extends Seeder
     {
         $now = Carbon::now();
         Tenant::insert([
-            ['name' => 'Company 01', 'domain' => 'company_01.localhost', 'database' => 'company_01','created_at' => $now,    'updated_at' => $now,],
-            ['name' => 'Company 02', 'domain' => 'company_02.localhost', 'database' => 'company_02','created_at' => $now,    'updated_at' => $now,],
+            ['name' => 'Company 01', 'domain' => 'company_01.localhost', 'database' => 'company_01', 
+                'username' => 'company_01', 'password' => 'Pa$$w0rd', 'active' => 1,
+                'created_at' => $now,    'updated_at' => $now,],
+            ['name' => 'Company 02', 'domain' => 'company_02.localhost', 'database' => 'company_02',
+            'username' => 'company_02', 'password' => 'Pa$$w0rd', 'active' => 1,
+            'created_at' => $now,    'updated_at' => $now,],
         ]);
     }
 }

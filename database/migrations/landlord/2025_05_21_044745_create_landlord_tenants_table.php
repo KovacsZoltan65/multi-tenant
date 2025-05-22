@@ -13,9 +13,15 @@ return new class extends Migration
     {
         Schema::create('tenants', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('domain')->unique();
-            $table->string('database')->unique();
+            $table->string('name')->collation('utf8mb3_unicode_ci');
+            $table->string('domain')->collation('utf8mb3_unicode_ci')->unique();
+            $table->string('host', 125)->collation('utf8mb3_unicode_ci')->default('localhost')->comment('Adatbázis szerver címe');
+            $table->integer('port')->default(3306)->comment('Adatbázis port');
+            $table->string('database')->collation('utf8mb3_unicode_ci')->unique();
+            $table->string('username')->collation('utf8mb3_unicode_ci')->comment('Adatbázis felhasználó');
+            $table->string('password')->collation('utf8mb3_unicode_ci');
+            $table->boolean('active')->default(1)->index()->comment('Aktív');
+
             $table->timestamps();
         });
     }
