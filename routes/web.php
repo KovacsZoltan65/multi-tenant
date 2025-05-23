@@ -26,8 +26,8 @@ Route::middleware('auth')->group(function () {
 
 /*
  * =======================================================
- * http://company-01.localhost/employees
- * http://company-02.localhost/employees
+ * http://company-01.tenant/employees
+ * http://company-02.tenant/employees
  * =======================================================
  */
 Route::middleware(['tenant'])->group(function() {
