@@ -26,11 +26,11 @@ Route::middleware('auth')->group(function () {
 
 /*
  * =======================================================
- * http://company_01.localhost/employees
- * http://company_02.localhost/employees
+ * http://company-01.localhost/employees
+ * http://company-02.localhost/employees
  * =======================================================
  */
-Route::middleware(['tenant'])->group(function(){
+Route::middleware(['tenant'])->group(function() {
     Route::get('/employees', [App\Http\Controllers\EmployeeController::class, 'index'])->name('employees.index');
 });
 
