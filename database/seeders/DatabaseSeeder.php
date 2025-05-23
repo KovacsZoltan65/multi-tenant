@@ -21,14 +21,15 @@ class DatabaseSeeder extends Seeder
         //    'email' => 'test@example.com',
         //]);
 
-        Tenant::checkCurrent() 
-            ? $this->runTenantSpecificSeeders() 
+        Tenant::checkCurrent()
+            ? $this->runTenantSpecificSeeders()
             : $this->runLandlordSpecificSeeders();
     }
 
     public function runTenantSpecificSeeders()
     {
         // run tenant specific seeders
+
         $this->call([
             EmployeeSeeder::class,
 
@@ -37,12 +38,14 @@ class DatabaseSeeder extends Seeder
             RoleSeeder::class,
             UserSeeder::class,
             // ------------------------------------
+
+            //HqEmailSeeder::class
         ]);
 
-        /*
+
         // tenant specifikus seeder
         $tenant = Tenant::current(); // vagy app(Tenant::class)
-
+/*
         if (!$tenant) {
             $this->command->error('No tenant context available.');
             return;
@@ -63,14 +66,28 @@ class DatabaseSeeder extends Seeder
         } else {
             $this->call(DefaultTenantSeeder::class);
         }
+*/
+        if( $tenant->domain === 'hq.localhost' ) {
+            $this->call([
+                //
+            ]);
+        } else {
+            $this->call([
+                EmployeeSeeder::class,
 
+                // Fontos a sorrend, ne változtasd meg!!!
+
+                // ------------------------------------
+            ]);
+        }
+/*
         vagy:
 
         match ($tenant->id) {
             'tenant_abc' => $this->call(TenantAbcSeeder::class),
             default => $this->call(DefaultTenantSeeder::class),
         };
-        
+
         */
 
     }

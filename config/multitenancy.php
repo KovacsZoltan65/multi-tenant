@@ -121,4 +121,12 @@ return [
     'not_tenant_aware_jobs' => [
         // ...
     ],
+
+    'central_domains' => [
+        'hq.localhost',
+    ],
+
+    'tenant_identification' => [
+        \Spatie\Multitenancy\TenantFinder\DomainTenantFinder::class,
+    ],
 ];

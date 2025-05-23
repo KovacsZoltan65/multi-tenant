@@ -8,6 +8,10 @@ php artisan breeze:install vue
 npm install
 npm install vue@3 @inertiajs/vue3
 
+cache törlés
+php artisan tenants:artisan "cache:clear"
+php artisan config:clear
+php artisan config:cache
 
 
 php artisan vendor:publish --provider="Spatie\Multitenancy\MultitenancyServiceProvider" --tag="multitenancy-config"
@@ -55,13 +59,13 @@ php artisan tenants:artisan "migrate:fresh --path=database/migrations/tenant --d
             Spatie\Multitenancy\Tasks\PrefixCacheTask::class,
             // egyéb feladatok...
         ],
-    
+
 2. Cache használata:
     A beállítás után a cache használata automatikusan bérlőspecifikus lesz. Például:
         cache()->put('kulcs', 'érték');
         $érték = cache()->get('kulcs');
     A fenti példában a 'kulcs' csak az aktuális bérlő cache-ében lesz elérhető.
-    Megjegyzés: A PrefixCacheTask csak memóriaalapú cache tárolók esetén működik, mint például APC vagy Redis. 
+    Megjegyzés: A PrefixCacheTask csak memóriaalapú cache tárolók esetén működik, mint például APC vagy Redis.
 
 // ============================================
 // FÁJLRENDSZER ELKÜLÖNÍTÉS

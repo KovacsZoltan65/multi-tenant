@@ -7,6 +7,7 @@ use App\Models\Tenant;
 use Carbon\Carbon;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Schema;
 
 class EmployeeSeeder extends Seeder
 {
@@ -15,8 +16,12 @@ class EmployeeSeeder extends Seeder
      */
     public function run(): void
     {
+        Schema::disableForeignKeyConstraints();
+        Employee::truncate();
+        Schema::enableForeignKeyConstraints();
+
         $now = Carbon::now();
-        
+
         $tenant = Tenant::current();
 
         if( $tenant->name === 'Company 01' ) {
