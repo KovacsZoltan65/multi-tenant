@@ -26,19 +26,25 @@ Route::middleware('auth')->group(function () {
 
 /*
  * =======================================================
- * K√∂zponti admin fel√ºlet
+<<<<<<< .mine
+ * Kˆzponti admin fel¸let
+
+=======
+ * http://company-01.tenant/employees
+ * http://company-02.tenant/employees
+>>>>>>> .theirs
  * =======================================================
  * http://hq.localhost/
  */
 Route::domain('hq.tenant')->group(function() {
     Route::get('/', [App\Http\Controllers\hq\AdminController::class, 'index'])->name('admin.index');
 
-    // Tov√°bbi admin √∫tvonalak...
+    // Tov·bbi admin ˙tvonalak...
 });
 
 /*
  * =======================================================
- * B√©rl≈ëi fel√ºlet
+ * BÈrlıi fel¸let
  * =======================================================
  * http://company_01.tenant/employees
  * http://company_02.tenant/employees
@@ -46,7 +52,7 @@ Route::domain('hq.tenant')->group(function() {
 Route::middleware(['tenant'])->group(function(){
     Route::get('/employees', [App\Http\Controllers\EmployeeController::class, 'index'])->name('employees.index');
 
-    // Tov√°bbi b√©rl≈ëi √∫tvonalak...
+    // Tov·bbi bÈrlıi ˙tvonalak...
 });
 
 require __DIR__.'/auth.php';
