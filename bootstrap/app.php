@@ -11,12 +11,17 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware) {
-        $middleware->web(append: [
-            \App\Http\Middleware\HandleInertiaRequests::class,
-            \Illuminate\Http\Middleware\AddLinkHeadersForPreloadedAssets::class,
+        // Middleware aliasok regisztrálása
+        $middleware->alias([
+            'needsTenant' => \Spatie\Multitenancy\Http\Middleware\NeedsTenant::class,
+            'ensureValidTenantSession' => \Spatie\Multitenancy\Http\Middleware\EnsureValidTenantSession::class,
         ]);
 
-        //
+        // Middleware csoport létrehozása
+        $middleware->group('tenant', [
+            'needsTenant',
+            'ensureValidTenantSession',
+        ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {
         //
