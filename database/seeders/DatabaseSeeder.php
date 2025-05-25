@@ -39,7 +39,7 @@ class DatabaseSeeder extends Seeder
             UserSeeder::class,
             // ------------------------------------
 
-            //HqEmailSeeder::class
+            EmailsSeeder::class,
         ]);
 
 

@@ -26,33 +26,28 @@ Route::middleware('auth')->group(function () {
 
 /*
  * =======================================================
-<<<<<<< .mine
- * Központi admin felület
-
-=======
- * http://company-01.tenant/employees
- * http://company-02.tenant/employees
->>>>>>> .theirs
+ * KÃ¶zponti admin felÃ¼let
  * =======================================================
- * http://hq.localhost/
+ * http://hq.tenant/
  */
 Route::domain('hq.tenant')->group(function() {
     Route::get('/', [App\Http\Controllers\hq\AdminController::class, 'index'])->name('admin.index');
 
-    // További admin útvonalak...
+    // Tovobbi admin Ãºtvonalak...
 });
 
 /*
  * =======================================================
- * Bérlõi felület
+ * BÃ©rlÅ‘i felÃ¼let
+ * http://company-01.tenant/employees
+ * http://company-02.tenant/employees
  * =======================================================
- * http://company_01.tenant/employees
- * http://company_02.tenant/employees
+ * http://hq.localhost/
  */
 Route::middleware(['tenant'])->group(function(){
     Route::get('/employees', [App\Http\Controllers\EmployeeController::class, 'index'])->name('employees.index');
 
-    // További bérlõi útvonalak...
+    // TovÃ¡bbi bÃ©rlÅ‘i Ãºtvonalak...
 });
 
 require __DIR__.'/auth.php';

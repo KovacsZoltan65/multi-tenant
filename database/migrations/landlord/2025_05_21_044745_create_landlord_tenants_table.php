@@ -12,6 +12,10 @@ return new class extends Migration
     public function up()
     {
         Schema::create('tenants', function (Blueprint $table) {
+            $table->engine('InnoDB');
+            $table->charset('utf8mb3');
+            $table->collation('utf8mb3_unicode_ci');
+
             $table->id();
             $table->string('name')->collation('utf8mb3_unicode_ci');
             $table->string('domain')->collation('utf8mb3_unicode_ci')->unique();
