@@ -123,7 +123,7 @@ return [
     ],
 
     'central_domains' => [
-        'hq.localhost',
+        'hq.tenant',
     ],
 
     'tenant_identification' => [

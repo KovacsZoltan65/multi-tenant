@@ -10,8 +10,13 @@ npm install vue@3 @inertiajs/vue3
 
 cache törlés
 php artisan tenants:artisan "cache:clear"
-php artisan config:clear
+
+//php artisan cache:clear       # Alkalmazás cache
+php artisan config:clear      # Konfigurációs cache
 php artisan config:cache
+php artisan route:clear       # Útvonal cache
+php artisan view:clear        # Nézet cache
+php artisan event:clear       # Esemény cache
 
 
 php artisan vendor:publish --provider="Spatie\Multitenancy\MultitenancyServiceProvider" --tag="multitenancy-config"
