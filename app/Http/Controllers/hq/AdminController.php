@@ -23,22 +23,31 @@ class AdminController extends Controller
             
             $connectionName = 'tenant_' . $tenant['id'];
                     
-            Config::set("database.connections.{$connectionName}", [
-                'driver' => 'mysql',
-                'host' => $tenant['host'],
-                'port' => $tenant['port'],
-                'database' => $tenant['database'],
-                'username' => $tenant['username'],
-                'password' => $tenant['password'],
-                'charset' => 'utf8mb3',
-                'collation' => 'utf8mb3_unicode_ci',
-                'prefix' => '',
-                'strict' => true,
-                'engine' => 'InnoDB',
-            ]);
+            if( !Config::has("database.connections.{$connectionName}") ) {
+                Config::set("database.connections.{$connectionName}", [
+                    'driver' => 'mysql',
+                    'host' => $tenant['host'],
+                    'port' => $tenant['port'],
+                    'database' => $tenant['database'],
+                    'username' => $tenant['username'],
+                    'password' => $tenant['password'],
+                    'charset' => 'utf8mb3',
+                    'collation' => 'utf8mb3_unicode_ci',
+                    'prefix' => '',
+                    'strict' => true,
+                    'engine' => 'InnoDB',
+                ]);
+
+                DB::purge($connectionName); // Előző kapcsolat törlése, ha volt
+                DB::reconnect($connectionName); // Új kapcsolat létrehozása
+            }
             
-            DB::purge($connectionName); // Előző kapcsolat törlése, ha volt
-            DB::reconnect($connectionName); // Új kapcsolat létrehozása
+            try {
+                \DB::connection($connectionName)->getPdo();
+            } catch( \Exception $ex ) {
+                print_r('A kapcsolat nem létezik ('.$tenant['name'].')' . '<br/>');
+                continue;
+            }
             
             //$emails = DB::connection($connectionName)->table('emails')->get();
             // vagy
