@@ -2,7 +2,7 @@
 
 namespace Database\Seeders;
 
-use App\Models\Employee;
+use App\Models\tenant\Employee;
 use App\Models\Tenant;
 use Carbon\Carbon;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
