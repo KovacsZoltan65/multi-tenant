@@ -23,7 +23,7 @@ Route::domain('hq.tenant')->group(function() {
  * http://company-01.tenant/employees
  * http://company-02.tenant/employees
  * =======================================================
- * http://hq.localhost/
+ * http://hq.tenant/
  */
 Route::middleware(['tenant'])->group(function(){
     Route::get('/employees', [App\Http\Controllers\EmployeeController::class, 'index'])->name('employees.index');

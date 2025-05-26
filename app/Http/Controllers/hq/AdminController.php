@@ -12,13 +12,14 @@ class AdminController extends Controller
 {
     public function index()
     {
+        $currentTenant = Tenant::current();
         $tenants = Tenant::where('name', '<>', 'HQ')->get()->toArray();
         echo '<pre>';
-        //print_r($tenants);
+        print_r('Current: ' . $currentTenant->name . '<br />');
         
         foreach( $tenants as $tenant ) {
           
-            print_r($tenant['name'] . '<br />');
+            print_r('Actual: ' . $tenant['name'] . '<br />');
             
             $connectionName = 'tenant_' . $tenant['id'];
                     
@@ -42,6 +43,8 @@ class AdminController extends Controller
             //$emails = DB::connection($connectionName)->table('emails')->get();
             // vagy
             $emails = \App\Models\Email::on($connectionName)->get();
+            
+            print_r('Emails: ' . '<br />');
             
             foreach($emails as $email) {
                 print_r($email->to . '<br />');
