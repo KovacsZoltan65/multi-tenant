@@ -10,7 +10,10 @@ use Illuminate\Support\Facades\Route;
  * http://company-02.tenant/employees
  */
 Route::middleware(['tenant'])->group(function(){
-    Route::get('/employees', [App\Http\Controllers\tenant\EmployeeController::class, 'index'])->name('employees.index');
+    Route::get(
+        '/employees', 
+        [App\Http\Controllers\tenant\EmployeeController::class, 'index']
+    )->name('employees.index');
 
     // További bérlői útvonalak...
 
