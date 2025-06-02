@@ -11,7 +11,13 @@ class EmployeeController extends Controller
     public function index()
     {
         $employees = Employee::all(); // Az összes dolgozó lekérése
-        dd($employees->toArray());
-        //return view('employees.index', compact('employees'));
+        
+        print_r('Employees: <br />');
+        
+        foreach( $employees as $employee ) {
+            print_r("$employee->name ($employee->email)  <br />");
+        }
+        
+        print_r('----------------------' . '<br />');
     }
 }
